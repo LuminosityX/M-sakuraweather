@@ -4,9 +4,9 @@
     <version value="1"/>
 
     <list>
-        <mapping class="com.m_sakuraweather.android.db.Province"/>
-        <mapping class="com.m_sakuraweather.android.db.City"/>
-        <mapping class="com.m_sakuraweather.android.db.County"/>
+        <mapping class="com.example.m_sakuraweather.db.Province"/>
+        <mapping class="com.example.m_sakuraweather.db.City"/>
+        <mapping class="com.example.m_sakuraweather.db.County"/>
     </list>
 
 </literpal>
