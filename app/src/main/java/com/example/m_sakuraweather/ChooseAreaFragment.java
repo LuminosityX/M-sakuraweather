@@ -1,6 +1,7 @@
 package com.example.m_sakuraweather;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.media.MediaMetadataCompat;
@@ -82,9 +83,16 @@ public class ChooseAreaFragment extends Fragment {
                     selectedProvince = provinceList.get(position);
                     queryCity();
                 }
-                if(currentLevel == Level_City){
+                else if(currentLevel == Level_City){
                     selectedCity = cityList.get(position);
                     queryCountry();
+                }
+                else if(currentLevel == Level_Country){
+                    String weatherId = countryList.get(position).getWeatherId();
+                    Intent intent = new Intent(getActivity(),WeatherActivity.class);
+                    intent.putExtra("weather_id",weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
@@ -115,6 +123,8 @@ public class ChooseAreaFragment extends Fragment {
             adapter.notifyDataSetChanged();
             listView.setSelection(0);
             currentLevel=Level_Province;
+            DataSupport.deleteAll(City.class);
+            DataSupport.deleteAll(County.class);
         }
         else{
             String address ="http://guolin.tech/api/china";
@@ -222,7 +232,7 @@ public class ChooseAreaFragment extends Fragment {
     private void showProgressDialog(){
         if(progressDialog == null){
             progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setMessage("正在加载");
+            progressDialog.setMessage("正在加载....");
             progressDialog.setCanceledOnTouchOutside(false);
         }
         progressDialog.show();
